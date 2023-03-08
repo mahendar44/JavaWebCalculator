@@ -13,7 +13,7 @@ pipeline {
         stage ('build') {
 
             steps {
-                sh 'mvn clean pacakge'
+                sh 'mvn pacakge'
             
             }
         }
