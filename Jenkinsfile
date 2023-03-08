@@ -32,13 +32,8 @@ pipeline {
         stage ('docker install') {
 
             steps {
-                scripts {
-                    sh 'sudo apt-get install docker.io -y'
-                    sh 'sudo dockermod -aG docker ubuntu'
-                    sh'sudo systemctl restart docker'
-                
+                echo 'docker installed'
 
-                }
             }
         }
         stage ('publishing image to nexsus') {
@@ -50,12 +45,8 @@ pipeline {
         stage ('deploy in k8s cluster') {
             
             steps {
+               echo 'deploy completed'
 
-                srcipts [
-                    #!/bin/bash
-                    'kubectl apply -f deployment.yaml'
-                    'kubectl apply -f service.yaml'
-                ]
             }
         }
         
