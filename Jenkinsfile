@@ -13,6 +13,7 @@ pipeline {
         stage ('checkout') {
             
             steps {
+                git 'https://github.com/mahendar44/JavaWebCalculator.git'
                 
         stage ('build') {
 
