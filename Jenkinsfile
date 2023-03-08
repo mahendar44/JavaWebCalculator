@@ -1,33 +1,64 @@
 pipeline {
 
-    agent any
+    agent any 
 
     stages {
 
-        stage('hello') {
-            
-            steps{
-                echo 'hello world'  
+        stage ('build') {
+
+            steps {
+                echo "hello world"
             }
         }
         stage ('build') {
 
             steps {
-                sh 'mvn clean package'
-                sh 'mvn pacakge'
+                sh 'mvn clean pacakge'
+            
             }
         }
         stage ('test') {
 
             steps {
-                echo 'test completed'
+                echo 'mvn test completed'
             }
         }
         stage ('deploy') {
 
             steps {
-                echo 'deploy completed'
+                sh 'mvn deploy'
             }
         }
+        stage ('docker install') {
+
+            steps {
+                scripts {
+                    sh 'sudo apt-get install docker.io -y'
+                    sh 'sudo dockermod -aG docker ubuntu'
+                    sh'sudo systemctl restart docker'
+                
+
+                }
+            }
+        }
+        stage ('publishing image to nexsus') {
+
+            steps {
+                echo 'publish image'
+            }
+        }
+        stage ('deploy in k8s cluster') {
+            
+            steps {
+
+                srcipts [
+                    #!/bin/bash
+                    'kubectl apply -f deployment.yaml'
+                    'kubectl apply -f service.yaml'
+                ]
+            }
+        }
+        
+           
     }
 }
