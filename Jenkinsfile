@@ -4,12 +4,7 @@ pipeline {
 
     stages {
 
-        stage ('welcome') {
 
-            steps {
-                echo "hello world"
-            }
-        }
         stage ('checkout') {
             
             steps {
